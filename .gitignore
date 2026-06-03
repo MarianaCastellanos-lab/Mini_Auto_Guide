@@ -1,6 +1,5 @@
-env_Villa
+env_Villa/
 venv/
 __pycache__/
 *.pyc
-__pycache__/
-*.pyc
+*.pyo

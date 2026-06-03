@@ -1,0 +1,4 @@
+env_Villa
+venv/
+__pycache__/
+*.pyc

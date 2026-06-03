@@ -1,0 +1,40 @@
+## Arquitectura client_guiding/ (estructura de archivos)
+
+```
+client_guiding/
+├── main.py                      # Punto de entrada, wiring de dependencias
+├── config.py                    # Constantes, timeouts, paths
+│── logging_config.py                    # Constantes, timeouts, paths
+
+├── domain/                      # Objetos de negocio puros
+│   ├── entities.py
+│   ├── value_objects.py         # PixelScale, FocalLength, ExposureTime, Gain
+│   └── enums.py
+│
+├── application/                 # Casos de uso / Servicios
+│   ├── state_machine.py         # Máquina de 6 estados (orquestador)
+│   ├── guiding_service.py       # Lógica de guiado (MIGRADA del simulador)
+│   ├── calibration_service.py   # Lógica de calibración (MIGRADA del simulador)
+│   ├── star_selection_service.py
+│   └── image_processor.py      # Algoritmo mediana+sigma (MIGRADO del simulador)
+│
+├── infrastructure/              # Adaptadores externos
+│   ├── tcp_client.py            # Cliente TCP 2 puertos para comunicación con Pi
+│   ├── st4_gateway.py           # Wrapper GPIO/ST4 para montura ZEQ25
+│   ├── connection_manager.py    # Orquesta TCP + ImageStreamReceiver + ST4Gateway
+│   ├── image_stream.py          # Pipeline de imágenes con cola y suscriptores
+│   ├── camera_adapter.py        # NUEVO: adapta ImageStreamReceiver a capture_single_frame()
+│   └── protocol.py           # 
+│
+├── interface/                   # UI (Tkinter/customtkinter)
+│   ├── view.py
+│   ├── state_renderer.py
+│   └── adapters.py
+│
+└── shared/                      # Utilidades transversales
+    ├── context_manager.py       # ContextManager thread-safe (RLock)
+    ├── data_structures.py       # SystemContext, CorrectionProfile, etc.
+    └── event_bus.py             # EventBus asíncrono pub/sub
+```
+
+---
